@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
 import type { Ref } from "vue";
+import WindDirection from "./WindDirection.vue";
 
 type WeatherData = {
   location: {
@@ -21,10 +22,12 @@ type WeatherData = {
     wind_mph: number;
   };
 };
+
 type Coords = { latitude: number; longitude: number };
 interface Props {
   coords: Coords;
 }
+
 const props = defineProps<Props>();
 const data: Ref<WeatherData | undefined> = ref();
 
@@ -45,7 +48,6 @@ onMounted(async () => {
   const { latitude, longitude } = props.coords;
   const weatherResponse = await fetchWeather({ latitude, longitude });
   data.value = weatherResponse;
-  console.log(data.value);
 });
 
 const formatDate = (dateString: Date): string => {
@@ -59,10 +61,7 @@ const formatDate = (dateString: Date): string => {
 
 <template>
   <div>
-    <article
-      v-if="data && data.current"
-      class="max-w-md w-96 rounded-lg shadow-lg p-4 flex bg-white text-black"
-    >
+    <article v-if="data && data.current" class="">
       <div class="basis-1/4 text-left">
         <img :src="data.current.condition.icon" class="h-16 w-16" />
       </div>
@@ -75,6 +74,12 @@ const formatDate = (dateString: Date): string => {
         <p>{{ data.location.name }} {{ data.location.region }}</p>
         <p>Precipitation: {{ data.current.precip_mm }}mm</p>
         <p>{{ formatDate(data.location.localtime) }}</p>
+        <p>
+          Wind: {{ data.current.wind_kph }} kph
+
+          <!-- -------------- -->
+          <wind-direction :degrees="data.current.wind_degree" />
+        </p>
       </div>
     </article>
     <div v-else>Loading...</div>
