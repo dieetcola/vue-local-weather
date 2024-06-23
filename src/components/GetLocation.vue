@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
 import type { Ref } from "vue";
+import WeatherReport from "./WeatherReport.vue";
 
 type Geolocation = {
   latitude: number;
@@ -24,13 +25,10 @@ const getGeolocation = async (): Promise<void> => {
 
 onMounted(async () => {
   await getGeolocation();
-  console.log(coords);
 });
 </script>
 
 <template>
-  <div v-if="coords && !geolocationBlockedByUser">
-    {{ coords.latitude }} {{ coords.longitude }}
-  </div>
+  <WeatherReport v-if="coords && !geolocationBlockedByUser" :coords="coords" />
   <div v-if="geolocationBlockedByUser">User denied access</div>
 </template>
