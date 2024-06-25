@@ -83,7 +83,7 @@ const formatDate = (dateString: Date): string => {
           Wind: {{ data.current.wind_kph }} kph
 
           <!-- -------------- -->
-          <wind-direction :degrees="data.current.wind_degree" />
+          <WindDirection :degrees="data.current.wind_degree" />
         </p>
       </div>
     </article>
