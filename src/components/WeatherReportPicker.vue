@@ -3,17 +3,17 @@ import { ref, onMounted } from "vue";
 import type { Ref } from "vue";
 import WeatherReport from "./WeatherReport.vue";
 
-type Geolocation = {
+export interface Coords {
   latitude: number;
   longitude: number;
-};
+}
 
-const coords: Ref<Geolocation | undefined> = ref();
+const coords: Ref<Coords | undefined> = ref();
 const geolocationBlockedByUser: Ref<boolean> = ref(false);
 
 const getGeolocation = async (): Promise<void> => {
   await navigator.geolocation.getCurrentPosition(
-    async (position: { coords: Geolocation }) => {
+    async (position: { coords: Coords }) => {
       coords.value = position.coords;
     },
     (error: { message: string }) => {

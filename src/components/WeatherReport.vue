@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import type { Ref } from "vue";
 import WindDirection from "./WindDirection.vue";
+import type { Coords } from "./GetLocation";
 
 type WeatherData = {
   location: {
@@ -23,12 +24,16 @@ type WeatherData = {
   };
 };
 
-type Coords = { latitude: number; longitude: number };
-interface Props {
-  coords: Coords;
-}
+// type Coords = { latitude: number; longitude: number };
 
-const props = defineProps<Props>();
+// interface Props {
+//   coords: Coords;
+// }
+
+// const props = defineProps<Props>();
+const props = defineProps<{
+  coords: Coords;
+}>();
 const data: Ref<WeatherData | undefined> = ref();
 
 const fetchWeather = async (coords: Coords): Promise<WeatherData> => {

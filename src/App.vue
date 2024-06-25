@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import GetLocation from "./components/GetLocation.vue";
+<script setup>
+import WeatherReportPicker from "./components/WeatherReportPicker.vue";
 </script>
 
 <template>
-    <GetLocation />
+  <WeatherReportPicker />
 </template>
