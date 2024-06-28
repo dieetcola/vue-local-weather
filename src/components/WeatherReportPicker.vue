@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, defineAsyncComponent } from "vue";
 import type { Ref } from "vue";
-import WeatherReport from "./WeatherReport.vue";
+const WeatherReport = defineAsyncComponent(() => import("./WeatherReport.vue"));
 
 export interface Coords {
   latitude: number;

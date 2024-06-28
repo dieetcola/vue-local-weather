@@ -24,13 +24,6 @@ type WeatherData = {
   };
 };
 
-// type Coords = { latitude: number; longitude: number };
-
-// interface Props {
-//   coords: Coords;
-// }
-
-// const props = defineProps<Props>();
 const props = defineProps<{
   coords: Coords;
 }>();
@@ -87,6 +80,5 @@ const formatDate = (dateString: Date): string => {
         </p>
       </div>
     </article>
-    <div v-else>Loading...</div>
   </div>
 </template>

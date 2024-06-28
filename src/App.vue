@@ -1,5 +1,9 @@
 <script setup>
-import WeatherReportPicker from "./components/WeatherReportPicker.vue";
+import { defineAsyncComponent } from "vue";
+
+const WeatherReportPicker = defineAsyncComponent(() =>
+  import("./components/WeatherReportPicker.vue")
+);
 </script>
 
 <template>
