@@ -34,7 +34,7 @@ const fetchWeather = async (coords: Coords): Promise<WeatherData> => {
 
   const q = `${latitude},${longitude}`;
   const res = await fetch(
-    `https://api.weatherapi.com/v1/current.json?key=${
+    `https://api.weatherapiii.com/v1/current.json?key=${
       import.meta.env.VITE_APP_WEATHER_API_KEY
     }&q=${q}`
   );
