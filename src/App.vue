@@ -1,5 +1,5 @@
 <script setup>
-import { defineAsyncComponent } from "vue";
+import { Suspense, defineAsyncComponent } from "vue";
 
 const WeatherReportPicker = defineAsyncComponent(() =>
   import("./components/WeatherReportPicker.vue")
@@ -7,5 +7,12 @@ const WeatherReportPicker = defineAsyncComponent(() =>
 </script>
 
 <template>
-  <WeatherReportPicker />
+  <Suspense>
+    <template #default>
+      <WeatherReportPicker />
+    </template>
+    <template #fallback>
+      <div>...Loading</div>
+    </template>
+  </Suspense>
 </template>
