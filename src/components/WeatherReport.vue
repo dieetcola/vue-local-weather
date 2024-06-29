@@ -3,50 +3,13 @@ import { ref, onMounted } from "vue";
 import type { Ref } from "vue";
 import WindDirection from "./WindDirection.vue";
 import type { Coords } from "./GetLocation";
-
-type WeatherData = {
-  location: {
-    localtime: Date;
-    name: string;
-    region: string;
-  };
-  current: {
-    temp_c: number;
-    temp_f: number;
-    precip_mm: number;
-    condition: {
-      text: string;
-      icon: string;
-    };
-    wind_degree: number;
-    wind_kph: number;
-    wind_mph: number;
-  };
-};
+import { useWeatherReport } from "../composables/useWeatherReport.ts";
 
 const props = defineProps<{
   coords: Coords;
 }>();
-const data: Ref<WeatherData | undefined> = ref();
-
-const fetchWeather = async (coords: Coords): Promise<WeatherData> => {
-  const { latitude, longitude } = coords;
-
-  const q = `${latitude},${longitude}`;
-  const res = await fetch(
-    `https://api.weatherapiii.com/v1/current.json?key=${
-      import.meta.env.VITE_APP_WEATHER_API_KEY
-    }&q=${q}`
-  );
-  const data = (await res) && res.json();
-  return data;
-};
-
-onMounted(async () => {
-  const { latitude, longitude } = props.coords;
-  const weatherResponse = await fetchWeather({ latitude, longitude });
-  data.value = weatherResponse;
-});
+const { latitude, longitude } = props.coords;
+const { data } = useWeatherReport({ latitude, longitude });
 
 const formatDate = (dateString: Date): string => {
   const date = new Date(dateString);

@@ -8,7 +8,7 @@ const WeatherReportPicker = defineAsyncComponent(() =>
 const errMsg = ref(null);
 onErrorCaptured((e) => {
   errMsg.value = "something went wrong :(";
-  return tree;
+  return true;
 });
 </script>
 
