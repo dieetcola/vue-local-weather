@@ -1,13 +1,14 @@
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
-import type { Ref } from "vue";
+import { ref, type Ref, onMounted  } from "vue";
+
 import WindDirection from "./WindDirection.vue";
-import type { Coords } from "./GetLocation";
+import type { Coords } from "../types/index.ts";
 import { useWeatherReport } from "../composables/useWeatherReport.ts";
 
 const props = defineProps<{
   coords: Coords;
 }>();
+
 const { latitude, longitude } = props.coords;
 const { data } = useWeatherReport({ latitude, longitude });
 
@@ -37,8 +38,6 @@ const formatDate = (dateString: Date): string => {
         <p>{{ formatDate(data.location.localtime) }}</p>
         <p>
           Wind: {{ data.current.wind_kph }} kph
-
-          <!-- -------------- -->
           <WindDirection :degrees="data.current.wind_degree" />
         </p>
       </div>

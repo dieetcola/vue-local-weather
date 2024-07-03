@@ -1,12 +1,8 @@
 <script lang="ts" setup>
-import { ref, onMounted, defineAsyncComponent } from "vue";
-import type { Ref } from "vue";
-const WeatherReport = defineAsyncComponent(() => import("./WeatherReport.vue"));
+import { ref, type Ref,  onMounted, defineAsyncComponent } from "vue";
 
-export interface Coords {
-  latitude: number;
-  longitude: number;
-}
+import type { Coords } from "../types/index.ts";
+const WeatherReport = defineAsyncComponent(() => import("./WeatherReport.vue"));
 
 const coords: Ref<Coords | undefined> = ref();
 const geolocationBlockedByUser: Ref<boolean> = ref(false);
